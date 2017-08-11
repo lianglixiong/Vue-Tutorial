@@ -1,0 +1,13 @@
+Vue.component("xdetail",{
+	template:`
+		<div>
+			<p>详情页</p>
+		</div>
+	`,
+	mounted(){
+		//detail/1
+		console.log(this.$route.params.id)
+		//detail/?id=1
+		console.log(this.$route.query.id)
+	}
+})

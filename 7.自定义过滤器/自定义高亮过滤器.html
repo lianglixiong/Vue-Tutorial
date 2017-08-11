@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="demo"></div>
+	</body>
+	<script src="vue.js"></script>
+	<script>
+		//自定义过滤器
+		Vue.filter("heightlight", function(html, search) {
+			console.log(html, search)
+			var arr = html.split(search);
+			var output = arr.join("<span style='color:red'>" + search + "</span>");
+			return output
+		})
+		new Vue({
+			el: "#demo",
+			template: `
+				<div>
+					<input v-model="search" />
+					<p>{{{html|heightlight search}}}</p>
+				</div>
+			`,
+			data: {
+				search: "",
+				html: "laoyao"
+			}
+		})
+	</script>
+
+</html>

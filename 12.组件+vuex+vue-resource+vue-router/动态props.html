@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="demo"></div>
+	</body>
+	<script src="vue2.js"></script>
+	<script>
+		Vue.component('xheader', {
+			props: ["message"],
+			template: `
+				<div style="border:1px solid green">
+					<p>{{message}}</p>
+				</div>
+			`,
+			data: function() {
+				return {
+					name: "第一个组件"
+				}
+			}
+		})
+		new Vue({
+			el: "#demo",
+			data: {
+				name: "laoyao"
+			},
+			computed: {
+				named: function() {
+					this.ok()
+					return this.name + "ed"
+				}
+			},
+			template: `
+				<div>
+					<input v-model="name" />
+					<xheader :message="name"></xheader>
+					<p>{{named}}</p>
+				</div>
+			`,
+			methods: {
+				ok: function() {
+					console.log("ok")
+				}
+			}
+		})
+	</script>
+
+</html>

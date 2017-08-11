@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo" style="border: 1px solid #F0221C;">
+		</div>
+		<div id="demo2" style="border: 1px solid #A14C09;">
+		</div>
+	</body>
+	<script src="vue.js"></script>
+	<script>
+	
+		var exchange = 1;
+		var test = function(log){
+			console.log(log)
+		}
+		//构造器 组件的一种呈现
+		new Vue({
+			//element节点 querySelector
+ 			el:"#demo",
+ 			//HTML CSS
+ 			template:`
+ 			<div>
+ 				<p>{{name}} {{exchange}}</p>
+ 				<button @click="test('abc')">Ok</button>
+ 			</div>`,
+ 			//需要绑定的数据 $scope
+ 			data:{
+ 				name:"Hello",
+ 				exchange
+ 			},
+ 			methods:{
+ 				test
+ 			}
+		})
+		
+		new Vue({
+			//element节点 querySelector
+ 			el:"#demo2",
+ 			//需要绑定的数据 $scope
+ 			template:`
+ 			<div>
+ 				<p>{{name}} {{exchange}}</p>
+ 				<button @click="test('cba')">Ok</button>
+ 			</div>`,
+ 			data:{
+ 				name:"World",
+ 				exchange
+ 			},
+ 			methods:{
+ 				test
+ 			}
+		})
+	</script>
+</html>

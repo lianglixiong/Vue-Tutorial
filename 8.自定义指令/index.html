@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="demo">
+			<p v-color="ok()">{{name|ed}}</p>
+			<p v-abc skill="ps">{{name}}</p>
+		</div>
+	</body>
+	<script src="vue2.js"></script>
+	<script>
+		Vue.directive("color", function(value, a) {
+				console.log(this)
+					//this.el == ele
+					//this.expression == attr
+					//this.vm == scope
+					//ele
+				console.log(value)
+				console.log(a)
+					/*console.log(value)
+					this.vm.name = "ABC"//scope
+					this.el.style.color = this.expression;//attr
+					console.log(this.el.getAttribute("skill"))*/
+			})
+			//构造器
+		new Vue({
+			//element节点 querySelector
+			el: "#demo",
+			//需要绑定的数据 $scope
+			data: {
+				name: "Hello World"
+			},
+			methods: {
+				ok: function() {
+					console.log("ok")
+				}
+			},
+			filters: {
+				ed: function(input) {
+					return input + "ed"
+				}
+			},
+			directives: {
+				abc: {
+					bind: function(el, binding, vnode) {
+						console.log(el)
+						el.style.fontSize = 30 + "px"
+					}
+				}
+			}
+		})
+	</script>
+
+</html>

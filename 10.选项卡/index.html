@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="weui.css" />
+
+	<body>
+		<div id="demo">
+			<div class="weui-tab">
+				<div class="weui-tab__panel">
+
+				</div>
+				<div class="weui-tabbar">
+					<a v-for="arr in arrs" href="javascript:;" class="weui-tabbar__item" :class="{'weui-bar__item_on':page==$index}" @click="changeTab($index)">
+						<img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+						<p class="weui-tabbar__label">{{arr}}</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="vue.js"></script>
+	<script>
+		//构造器
+		new Vue({
+			//element节点 querySelector
+			el: "#demo",
+			//需要绑定的数据 $scope
+			data: {
+				name: "Hello World",
+				arrs: ["微信", "通讯录", "发现", "我"],
+				page: 0
+			},
+			methods: {
+				changeTab: function(page) {
+					console.log(page)
+					this.page = page
+				}
+			}
+		})
+	</script>
+
+</html>

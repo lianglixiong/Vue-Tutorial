@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="demo"></div>
+	</body>
+	<script src="js/vue2.js"></script>
+	<script>
+		new Vue({
+			el: "#demo",
+			data: {
+				name: "laoyao"
+			},
+			//template: "<div>{{name}}</div>",
+			render: function(createElement) {
+				return createElement(
+					//标签
+					'div', // tag name 标签名称
+					{
+						attrs: {
+							id: 'foo'
+						},
+					}, // 子组件中的阵列
+					[createElement(
+						'p',
+						{
+							style:{
+								color: 'red',
+							}
+						}
+					),["Hello"]]
+				)
+			},
+		})
+	</script>
+
+</html>

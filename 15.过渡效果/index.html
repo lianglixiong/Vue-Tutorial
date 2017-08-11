@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		.abc {
+			animation: p1 1s ease;
+			transition: all 2s;
+		}
+		
+		@keyframes p1 {
+			from {
+				opacity: 1;
+				height: 20px;
+				display: block;
+			}
+			to {
+				opacity: 0;
+				height: 0px;
+				display: none;
+			}
+		}
+		
+		.cba {
+			animation: p2 1s ease;
+			transition: all 2s;
+		}
+		
+		@keyframes p2 {
+			from {
+				opacity: 0;
+				height: 0px;
+				display: none;
+			}
+			to {
+				opacity: 1;
+				height: 20px;
+				display: block;
+			}
+		}
+		
+		.fade-enter-active {
+			transition: all .3s ease;
+		}
+		
+		.fade-leave-active {
+			transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+		}
+		
+		.fade-enter,
+		.fade-leave-to
+		/* .slide-fade-leave-active for <2.1.8 */
+		
+		{
+			transform: rotateX(180deg);
+			opacity: 0;
+		}
+		/*fade-enter-->fade-enter-active-->fade-leave-active-->fade-leave-to*/
+	</style>
+
+	<body>
+		<div id="demo">
+			<!--<p id="p1" :class="{'abc':!isShow,'cba':isShow,}">{{name}}</p>-->
+			<button @click="show">Ok</button>
+
+			<transition name="fade">
+				<p v-if="isShow">hello</p>
+			</transition>
+		</div>
+	</body>
+	<script src="js/vue2.js"></script>
+	<script>
+		new Vue({
+			el: "#demo",
+			data: {
+				name: "laoyao",
+				isShow: true
+			},
+			methods: {
+				show: function() {
+					this.isShow = !this.isShow
+				}
+			}
+		})
+	</script>
+
+</html>

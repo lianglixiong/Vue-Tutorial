@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<p style="color: red;">Radio</p>
+			A:<input type="radio" value="A" v-model="radio" />
+			
+			B:<input type="radio" value="B" v-model="radio" />
+			
+			C:<input type="radio" value="C" v-model="radio" />
+			
+			<p>{{radio}}</p>
+			
+			<p style="color: red;">CheckBox</p>
+			
+			A:<input type="checkbox" value="A" v-model="checkbox" />
+			
+			B:<input type="checkbox" value="B" v-model="checkbox" />
+			
+			C:<input type="checkbox" value="C" v-model="checkbox" />
+			<p>{{checkbox}}</p>
+		</div>
+	</body>
+	<script src="vue.js"></script>
+	<script>
+		//构造器
+		new Vue({
+			//element节点 querySelector
+ 			el:"#demo",
+ 			//需要绑定的数据 $scope
+ 			data:{
+ 				radio:"B",
+ 				name:"Hello World",
+ 				checkbox:["A","C"]
+ 			}
+		})
+	</script>
+</html>

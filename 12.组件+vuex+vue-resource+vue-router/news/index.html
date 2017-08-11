@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="../css/weui.css" />
+	<link rel="stylesheet" href="../css/swiper.css" />
+	<link rel="stylesheet" href="../css/index.css" />
+
+	<body>
+		<div id="demo"></div>
+	</body>
+	<script src="../js/vue2.js"></script>
+	<script src="../js/vuex.js"></script>
+	<script src="../js/vue-router2.js"></script>
+	<script src="../js/vue-resource.js"></script>
+	<script src="../js/swiper.js"></script>
+	<script src="../components/xheader.js"></script>
+	<script src="../components/xsearch.js"></script>
+	<script src="../components/xswiper.js"></script>
+	<script src="../components/xlist.js"></script>
+	<script src="../components/xgallery.js"></script>
+	<script src="../components/xdetail.js"></script>
+	<script src="../components/xsilde.js"></script>
+	<script>
+		/*var index = {
+							template: `
+								<div>
+									<xheader></xheader>
+									<xsearch></xsearch>
+									<xswiper></xswiper>
+									<xlist></xlist>
+									<xgallery></xgallery>
+								</div>
+							`
+						}
+
+						var detail = {
+							template: `
+								<p>详细页</p>
+							`
+						}*/
+		var router = new VueRouter({
+			routes: [{
+					path: '/index',
+					component: {
+						template: `
+							<div>
+								<xheader></xheader>
+								<xsearch></xsearch>
+								<xswiper></xswiper>
+								<xlist></xlist>
+								<xgallery></xgallery>
+								<xsilde></xsilde>
+							</div>
+						`
+					}
+				}, {
+					path: '/detail/:id',
+					component: {
+						template: `
+							<div>
+								<xdetail></xdetail>
+							</div>
+						`
+					}
+				}, {
+					path: '/',
+					redirect: '/index'
+				}]
+				// （缩写）相当于 routes: routes
+		});
+		//新建一个状态管理
+		var store = new Vuex.Store({
+			//定义一个状态
+			//所有组件的状态，也就是数据源
+			state: {
+				count: 1,
+				title: "标题",
+				search: "",
+				news: null,
+				imgUrl: null,
+				isShowGallery: false,
+				direction:"left"
+			},
+			getters: {
+				getCount(state) {
+					//处理数据
+					return state.count + "ed"
+				}
+			},
+			//分发状态
+			mutations: {
+				setCount(state, data) {
+					state.count = data
+
+				},
+				settitle(state, data) {
+					state.title = data
+				},
+				setNews(state) {
+					console.log(this.Vue.http)
+					this.Vue.http.get("https://cnodejs.org/api/v1//topics", {
+						params: {
+							//page: scope.page++,
+							tab: "ask",
+							limit: 10
+						}
+					}).then((data) => {
+						console.log(data)
+						state.news = data.body.data
+					}, (err) => {
+
+					})
+				}
+			},
+			//action就是触发mutations
+			actions: {
+				setChange(context, data) {
+					context.commit('setCount', data)
+					context.commit('settitle', data)
+				},
+				setNews(context, data) {
+					context.commit('setNews')
+				}
+			}
+		})
+
+		new Vue({
+			el: "#demo",
+			template: `
+				<router-view></router-view>
+			`,
+			store,
+			router,
+			mounted() {
+				console.log(this.$store)
+			}
+		})
+	</script>
+
+</html>

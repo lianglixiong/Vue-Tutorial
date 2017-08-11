@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<p>{{name+name2}}</p>
+			<p>{{nickname}}</p>
+		</div>
+	</body>
+	<script src="vue.js"></script>
+	<script>
+		//构造器
+		new Vue({
+			//element节点 querySelector
+ 			el:"#demo",
+ 			//需要绑定的数据 $scope
+ 			data:{
+ 				name:"Hello",
+ 				name2:"World"
+ 			},
+ 			//通过计算得出
+ 			computed:{
+ 				nickname:function(){
+ 					return this.name+this.name2;
+ 				}
+ 			}
+		})
+	</script>
+</html>

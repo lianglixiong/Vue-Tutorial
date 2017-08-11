@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="ngApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-controller="indexCtrl">
+			<xheader></xheader>
+			<p>{{name}}</p>
+		</div>
+	</body>
+	<script src="angular.js"></script>
+	<script>
+		var app = angular.module("ngApp",[]);
+		app.controller("indexCtrl",function($scope){
+			$scope.name = "abc"
+		})
+		app.component("xheader",{
+			//JS MODEL
+			controller:function($scope,$http){
+				$scope.skill = "PS"
+			},
+			//HTML VIEW
+			template:"<header>{{skill}}</header>"
+		})
+		console.log(app)
+		//app.directive()
+	</script>
+</html>

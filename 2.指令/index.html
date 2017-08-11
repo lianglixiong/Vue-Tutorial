@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="demo">
+			<p style="color: red;">1.{{}}</p>
+			<p>{{name}}</p>
+
+			<p style="color: red;">2.v-text/ng-bind</p>
+			<p v-text="name"></p>
+
+			<p style="color: red;">3.v-html/ng-bind-html</p>
+			<p>{{{html}}}</p>
+			<div v-html="html"></div>
+
+			<p style="color: red;">4.v-if/ng-if</p>
+			<p v-if="bool">Hello World 假</p>
+			<p v-if="!bool">Hello World 真</p>
+
+			<p style="color: red;">5.v-show/ng-show</p>
+			<p v-show="bool">Hello World 假</p>
+			<p v-show="!bool">Hello World 真</p>
+
+			<p style="color: red;">6.v-else</p>
+			<!--v-if和else必须写在一起-->
+			<p v-if="num>4">a</p>
+			<p v-else>b</p>
+
+			<p v-show="num>2">a</p>
+			<p v-else>b</p>
+
+			<p style="color: red;">7.v-for/ng-repeat</p>
+			<ul>
+				<li v-for="a in arr" track-by="$index" id="{{$index}}">{{a}}</li>
+			</ul>
+
+			<p style="color: red;">8.v-on:click/ng-click</p>
+			<button v-on:click="ok()">ok</button>
+			<input v-on:keyup="keyup()" />
+			<br />
+			<button @click="ok">ookk</button>
+			<input @keyup="keyup()" />
+
+			<p style="color: red;">9.v-bind/ng-class&&ng-style</p>
+			<style>
+				.blue {
+					color: blue;
+				}
+			</style>
+			<p v-bind:class="{blue:!bool}">测试</p>
+			<p :class="{blue:!bool}">测试</p>
+			<input type="range" v-model="size" />
+			<p v-bind:style="{fontSize:size + 'px'}">字体大小</p>
+			<p :style="{fontSize:size + 'px'}">字体大小</p>
+
+			<p style="color: red;">10.v-model/ng-model</p>
+			<p>你输入了：{{text}}</p>
+			<input v-model="text" />
+			<textarea v-model="text"></textarea>
+			<select v-model="text">
+				<option v-for="a in arr" track-by="$index" value="{{a}}">{{a}}</option>
+			</select>
+			
+			<p style="color: red;">对象和数组</p>
+			<p>名字{{obj.name}} 年龄{{obj.age}}</p>
+			<p>{{arr[0]}}</p>
+			<p>{{bool?"真":"假"}}</p>
+			<p :id="'name-'+name" class="yellow">属性值</p>
+			<style>
+				.yellow {
+					color: {{color}};
+				}
+			</style>
+		</div>
+	</body>
+	<script src="vue.js"></script>
+	<script>
+		(function() {
+			var vueData = {
+				//element节点 querySelector
+				el: "#demo",
+				//需要绑定的数据 $scope
+				data: {
+					name: "Hello World",
+					html: "<p>123<span>456</span></p>",
+					bool: false,
+					num: 3,
+					arr: ["a", "b", "a", "d"],
+					size: 30,
+					obj: {
+						name:"laoyao",
+						age:1
+					},
+					text: "a",//m
+					color:"yellow"
+				},
+				//函数
+				methods: {
+					ok: function() {
+						console.log("Hello World")
+					},
+					keyup: function() {
+						console.log("正在输入")
+					}
+				}
+			}
+			vueData.data.news = ["1", "2"];
+			//构造器
+			new Vue(vueData)
+		})()
+	</script>
+
+</html>

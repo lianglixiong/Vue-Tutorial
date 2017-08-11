@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+		</div>
+	</body>
+	<script src="vue.js"></script>
+	<script>
+		//构造器
+		var vm  = new Vue({
+			//element节点 querySelector
+ 			el:"#demo",
+ 			//需要绑定的数据 $scope
+ 			data:{
+ 				name:"Hello World"
+ 			},
+ 			//虚拟DOM
+ 			template:`
+ 				<div>
+ 					<p>{{name}}</p>
+					<button @click="ok()">ok</button>
+ 				</div>
+ 			`,
+ 			methods:{
+ 				ok:function(){
+ 					console.log("ok")
+ 				}
+ 			},
+ 			created:function(){
+ 				console.log("创建完状态")
+ 				//console.log(this)
+ 				console.log(this.$el)//null
+ 				console.log(this.$data)//有
+ 			},
+ 			//created->beforeCompile把数据填充到模板里面
+ 			beforeCompile:function(){
+ 				console.log("编译之前")
+ 				//console.log(this)
+ 				console.log(this.$el)
+ 				console.log(this.$data)
+ 				console.log(document.querySelector("#demo"))
+ 			},
+ 			//beforeCompile->compiled把模板插入到对应的DOM节点上
+ 			compiled:function(){
+ 				console.log("编译之后")
+ 				//console.log(this)
+ 				console.log(this.$el)
+ 				console.log(this.$data)
+ 				console.log(document.querySelector("#demo"))
+ 			},
+ 			//ready DOM已经完全生成，可以执行我们后面的逻辑
+ 			ready:function(){
+ 				console.log("准备阶段")
+ 				this.ok();
+ 			},
+		})
+	</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="demo">
+		</div>
+	</body>
+	<script src="vue2.js"></script>
+	<script>
+		//构造器
+		var vm = new Vue({
+			//element节点 querySelector
+			el: "#demo",
+			//需要绑定的数据 $scope
+			data: {
+				ask: "梁静茹",
+				answer: "Hello World"
+			},
+			//虚拟DOM
+			template: `
+ 				<div>
+ 					<input v-model="ask" @keyup="submit()" />
+					<p>{{answer}}</p>
+ 				</div>
+ 			`,
+			methods: {
+				submit: function() {
+					var xmlhttp = new XMLHttpRequest();
+					var self = this;
+					xmlhttp.open("GET", "http://www.tuling123.com/openapi/api?key=c75ba576f50ddaa5fd2a87615d144ecf&info=" + this.ask, true);
+					xmlhttp.send();
+					xmlhttp.onreadystatechange = function(){
+						if(xmlhttp.readyState==4&&xmlhttp.status==200){
+							console.log(xmlhttp.responseText)
+							console.log(this)
+							self.answer = JSON.parse(xmlhttp.responseText).text;
+						}
+					}
+				}
+			},
+			
+			mounted: function() {
+				this.submit();
+			}
+		})
+	</script>
+
+</html>

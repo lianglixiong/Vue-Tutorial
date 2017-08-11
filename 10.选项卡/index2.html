@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo">
+			<p v-for="(arr,index) in arrs" track-by="$index" :id="index">{{arr}}</p>
+		</div>
+	</body>
+	<script src="vue2.js"></script>
+	<script>
+		//构造器
+		new Vue({
+			//element节点 querySelector
+ 			el:"#demo",
+ 			//需要绑定的数据 $scope
+ 			data:{
+ 				name:"Hello World",
+ 				arrs:["a","b","c","a","d"]
+ 			}
+		})
+	</script>
+</html>

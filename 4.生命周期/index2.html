@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo"></div>
+	</body>
+	<script src="vue2.js"></script>
+	<script>
+		new Vue({
+			el:"#demo",
+			data:{
+				name:"Hello"
+			},
+			template:`
+				<div>
+					<p>{{name}}</p>
+					<input v-model="name" />
+				</div>
+			`,
+			beforeCreate:function(){
+				console.log("创建之前")
+				console.log(this.$el)//undefined
+				console.log(this.$data)//undefined
+			},
+			created:function(){
+				console.log("创建之后")
+				console.log(this.$el)//undefined
+				console.log(this.$data)//有
+			},
+			//compiled和beforeCompile
+			beforeMount:function(){
+				console.log("挂载之前")
+				console.log(this.$el)//undefined
+				console.log(this.$data)//有
+			},
+			//ready
+			mounted:function(){
+				console.log("挂载之后")
+				console.log(this.$el)//有
+				console.log(this.$data)//有
+			},
+			beforeUpdate:function(){
+				console.log("更新之前")
+				console.log(this.$el)//有
+				console.log(this.$data)//有
+				console.log(document.querySelector("body"))
+			},
+			updated:function(){
+				console.log("更新之后")
+				console.log(this.$el)//有
+				console.log(this.$data)//有
+				console.log(document.querySelector("body"))
+			}
+		})
+	</script>
+</html>

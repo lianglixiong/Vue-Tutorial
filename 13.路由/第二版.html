@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="js/vue2.js"></script>
+	<script src="js/vue-router2.js"></script>
+	<script>
+		//定义但是没注册
+		var page1 = {
+			template: `
+				<div>第一页</div>
+			`
+		}
+
+		var page2 = {
+			template: `
+				<div>第二页</div>
+			`
+		}
+
+		var router = new VueRouter({
+			routes: [{
+					path: '/index',
+					component: page1
+				}, {
+					path: '/home',
+					component: page2
+				}]
+				// （缩写）相当于 routes: routes
+		})
+
+		new Vue({
+			el:"#app",
+			router,
+			template:`
+				<router-view></router-view>
+			`
+		})
+	</script>
+
+</html>

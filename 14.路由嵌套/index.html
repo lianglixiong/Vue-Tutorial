@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="demo"></div>
+	</body>
+	<script src="js/vue2.js"></script>
+	<script src="js/vue-router2.js"></script>
+	<script>
+		var router = new VueRouter({
+			routes: [{
+					path: '/index',
+					component: {
+						template: `
+							<div>
+								这是index的页面
+								<a href="#/index/a">a</a>
+								<a href="#/index/b">b</a>
+								<router-view></router-view>
+							</div>
+						`
+					},
+					children: [{
+						//子路由没有/
+						path: 'a',
+						component: {
+							template: `
+								<div>
+									<p>a</p>
+									<a href="#/index/a/aa">aa</a>
+									<a href="#/index/a/bb">bb</a>
+									<router-view></router-view>
+								</div>
+							`
+						},
+						children: [{
+							path: 'aa',
+							component: {
+								template: "<p>aa</p>"
+							}
+						}, {
+							path: 'bb',
+							component: {
+								template: "<p>bb</p>"
+							}
+						}]
+					}, {
+						//子路由没有/
+						path: 'b',
+						component: {
+							template: "<p>b</p>"
+						}
+					}]
+				}, {
+					path: '/detail',
+					component: {
+						template: `
+							<div>
+								这是detail的页面
+							</div>
+						`
+					}
+				}, {
+					path: '/',
+					redirect: '/index'
+				}]
+				// （缩写）相当于 routes: routes
+		});
+		new Vue({
+			el: "#demo",
+			template: `
+				<div>
+					<a href="#/index">index</a>
+					<a href="#/detail">detail</a>
+					<router-view></router-view>
+				</div>
+			`,
+			router,
+			mounted() {
+				console.log(this)
+			}
+		})
+	</script>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="demo"></div>
+	</body>
+	<script src="vue.js"></script>
+	<script>
+		//自定义过滤器
+		Vue.filter("ed",function(input){
+			return input+"ed"
+		})
+		new Vue({
+			el:"#demo",
+			template:`
+				<div>
+					<p>{{name|ed}}</p>
+				</div>
+			`,
+			data:{
+				name:"laoyao"
+			}
+		})
+	</script>
+</html>

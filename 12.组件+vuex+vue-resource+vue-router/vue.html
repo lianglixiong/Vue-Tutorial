@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="demo"></div>
+	</body>
+	<script src="vue2.js"></script>
+	<script>
+		/*Vue.filter()
+								Vue.directive()*/
+		Vue.component('xheader', {
+			props:["message"],
+			template: `
+				<div style="border:1px solid green">
+					<p v-color="'red'">{{name|ed}}</p>
+					<button @click="ok">ok</button>
+					<p v-if="message=='1'">1</p>
+				</div>
+			`,
+			data: function() {
+				return {
+					name: "第一个组件"
+				}
+			},
+			methods: {
+				ok: function() {
+					console.log("ok")
+				}
+			},
+			filters: {
+				ed: function(input) {
+					return input + "ed";
+				}
+			},
+			directives: {
+				color: function(el, binding, vnode) {
+					console.log(el)
+					el.style.color = binding.value
+				}
+			},
+			mounted:function(){
+				console.log(this.message)
+			}
+		})
+		new Vue({
+			el: "#demo",
+			data: {
+				name: "laoyao"
+			},
+			template: `
+				<div>
+					<xheader :message="2"></xheader>
+					<xheader message="abc"></xheader>
+					<xheader message="1"></xheader>
+					<p>{{name}}</p>
+				</div>
+			`
+		})
+	</script>
+
+</html>

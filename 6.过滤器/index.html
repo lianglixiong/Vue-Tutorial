@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="demo">
+			<p style="color: red;">1.currency</p>
+			<p>{{num|currency "￥" 5}}</p>
+
+			<p style="color: red;">2.lowercase</p>
+			<p>{{name|lowercase}}</p>
+
+			<p style="color: red;">3.uppercase</p>
+			<p>{{name|uppercase}}</p>
+
+			<p style="color: red;">4.pluralize</p>
+			<p>{{date}}{{date|pluralize 'st' 'nd' 'rd' 'th'}}</p>
+
+			<p style="color: red;">5.json</p>
+			<p>{{obj|json 10}}</p>
+
+			<p style="color: red;">6.debounce</p>
+			<button @click="ok()|debounce 2000">ok</button>
+
+			<p style="color: red;">7.capitalize</p>
+			<p>{{name|capitalize}}</p>
+
+			<p style="color: red;">8.orderBy</p>
+			<ul>
+				<li v-for="arr in arrs|orderBy 'age' -1">{{arr.name}} {{arr.age}}</li>
+			</ul>
+
+			<p style="color: red;">9.filterBy</p>
+			<input v-model="search" />
+			<ul>
+				<li v-for="arr in arrs|filterBy search in 'name'">{{arr.name}} {{arr.age}}</li>
+			</ul>
+
+			<p style="color: red;">9.limitBy</p>
+			<input v-model="search" />
+			<ul>
+				<li v-for="arr in arrs|limitBy 2 1">{{arr.name}} {{arr.age}}</li>
+			</ul>
+			<p>{{name|limitBy 2 2}}</p>
+		</div>
+	</body>
+	<script src="vue.js"></script>
+	<script>
+		//构造器
+		new Vue({
+			//element节点 querySelector
+			el: "#demo",
+			//需要绑定的数据 $scope
+			data: {
+				num: 123456,
+				name: "aBcDeF",
+				date: [1, 2, 3, 4],
+				obj: {
+					name: "laoyao",
+					skill: "ps"
+				},
+				arrs: [{
+					name: "laoxie",
+					age: 18
+				}, {
+					name: "laolan",
+					age: 31
+				}, {
+					name: "laoyao",
+					age: 3
+				}],
+				search: ""
+			},
+			methods: {
+				ok: function() {
+					console.log("ok")
+				}
+			}
+		})
+	</script>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="demo"></div>
+	</body>
+	<script src="js/vue.js"></script>
+	<script src="js/vue-router.js"></script>
+	<script>
+		//定义但是没注册
+		var page1 = {
+			template: `
+				<div>第一页</div>
+			`
+		}
+
+		var page2 = {
+			template: `
+				<div>第二页</div>
+			`
+		}
+
+		//空组件代替了new Vue
+		var App = {
+			template: `
+				<div>
+					<p>{{title}}</p>
+					<a href="#!/index">index</a>
+					<a href="#!/home">home</a>
+					<router-view></router-view>
+				</div>
+			`,
+			data() {
+				return {
+					title: "组件DEMO"
+				}
+			}
+		}
+
+		//定义路由的对象
+		var router = new VueRouter();
+		//路由拦截
+		/*router.beforeEach(function(transition) {
+			if(transition.to.path === '/index') {
+				console.log("你切换到index页面")
+			} else {
+				console.log("你切换到其他页面")
+			}
+		})*/
+		router.map({
+				'/index': {
+					component: page1
+				},
+				'/home': {
+					component: page2
+				}
+			})
+			//重定向
+		router.redirect({
+			'*': '/home'
+		})
+		router.start(App, '#demo')
+			/*new Vue({
+				el:"#demo",
+				router:router,
+				template:`
+				
+				`
+			})*/
+	</script>
+
+</html>
